@@ -23,7 +23,7 @@ if (isset($_SESSION['user_nom'])) {
     $nom_utilisateur = $_SESSION['user_nom'];
 
     // Préparez une requête pour obtenir le rôle de l'utilisateur
-    $query = "SELECT role FROM utilisateur WHERE user = ?";
+    $query = "SELECT satut FROM utilisateur WHERE user = ?";
     $stmt = $mysqli->prepare($query);
 
     // Lier le nom d'utilisateur au paramètre de la requête
@@ -33,7 +33,7 @@ if (isset($_SESSION['user_nom'])) {
     $stmt->execute();
     
     // Liez le résultat de la requête à une variable
-    $stmt->bind_result($role);
+    $stmt->bind_result($statut);
     
     // Récupérez le rôle de l'utilisateur
     $stmt->fetch();
@@ -42,7 +42,7 @@ if (isset($_SESSION['user_nom'])) {
     $stmt->close();
 
     // Vérifiez si l'utilisateur est un administrateur
-    if ($role === 'admin') {
+    if ($statut === 'admin') {
         // L'utilisateur est un administrateur, empêchez la suppression du compte
         echo "Les administrateurs ne sont pas autorisés à supprimer leur compte.";
     } else {
