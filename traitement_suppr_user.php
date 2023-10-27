@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 
-
 <?php 
 include 'config.php';
 include 'include/head.php';
@@ -23,31 +22,53 @@ if (isset($_SESSION['user_nom'])) {
     // Récupérez le nom d'utilisateur de la session
     $nom_utilisateur = $_SESSION['user_nom'];
 
-    // Préparez une requête pour supprimer la ligne de la table utilisateur où le nom d'utilisateur correspond
-    $query = "DELETE FROM utilisateur WHERE user = ?";
+    // Préparez une requête pour obtenir le rôle de l'utilisateur
+    $query = "SELECT role FROM utilisateur WHERE user = ?";
     $stmt = $mysqli->prepare($query);
 
     // Lier le nom d'utilisateur au paramètre de la requête
     $stmt->bind_param("s", $nom_utilisateur);
 
     // Exécutez la requête
-    if ($stmt->execute()) {
-        // La ligne a été supprimée avec succès
-        // Détruisez la session pour déconnecter l'utilisateur
-        session_destroy();
+    $stmt->execute();
+    
+    // Liez le résultat de la requête à une variable
+    $stmt->bind_result($role);
+    
+    // Récupérez le rôle de l'utilisateur
+    $stmt->fetch();
+    
+    // Fermez la requête $stmt
+    $stmt->close();
 
-        
-        
-        echo "Votre compte a bien été supprimé.";
+    // Vérifiez si l'utilisateur est un administrateur
+    if ($role === 'admin') {
+        // L'utilisateur est un administrateur, empêchez la suppression du compte
+        echo "Les administrateurs ne sont pas autorisés à supprimer leur compte.";
     } else {
-        // Gestion de l'erreur de suppression
+        // L'utilisateur n'est pas un administrateur, il peut supprimer son compte
+        // Préparez une requête pour supprimer la ligne de la table utilisateur où le nom d'utilisateur correspond
+        $query = "DELETE FROM utilisateur WHERE user = ?";
+        $stmt = $mysqli->prepare($query);
 
+        // Lier le nom d'utilisateur au paramètre de la requête
+        $stmt->bind_param("s", $nom_utilisateur);
+
+        // Exécutez la requête
+        if ($stmt->execute()) {
+            // La ligne a été supprimée avec succès
+            // Détruisez la session pour déconnecter l'utilisateur
+            session_destroy();
+            echo "Votre compte a bien été supprimé.";
+        } else {
+            // Gestion de l'erreur de suppression
+            echo "Une erreur est survenue lors de la suppression de votre compte.";
+        }
         
-        echo "Une erreur est survenue lors de la suppression de votre compte";
+        // Fermez la connexion et la requête $stmt
+        $stmt->close();
     }
 
-    // Fermez la connexion et la requête $stmt
-    $stmt->close();
     $mysqli->close();
 } else {
     header('Location: connexion.php'); // Redirigez vers la page de connexion si l'utilisateur n'est pas connecté
