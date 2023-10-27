@@ -23,7 +23,7 @@ if (isset($_SESSION['user_nom'])) {
     $nom_utilisateur = $_SESSION['user_nom'];
 
     // Préparez une requête pour obtenir le rôle de l'utilisateur
-    $query = "SELECT satut FROM utilisateur WHERE user = ?";
+    $query = "SELECT statut FROM utilisateur WHERE user = ?";
     $stmt = $mysqli->prepare($query);
 
     // Lier le nom d'utilisateur au paramètre de la requête
