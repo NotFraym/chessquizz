@@ -6,7 +6,7 @@
 </head>
 <body class="dark-theme">
     <?php include 'include/header.php'; ?>
-
+    <br><br>
     <h2>Quizz</h2>
 
     <?php
