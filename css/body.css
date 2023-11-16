@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h2, h3, h4 {
+    color: #0066cc;
+}
+
+#header {
+    /* Style for your header */
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+.categorie {
+    display: inline-block;
+    margin: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.categorie img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.categorie h4 {
+    margin-top: 10px;
+}
+
+footer {
+    /* Style for your footer */
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
