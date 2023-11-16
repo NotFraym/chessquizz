@@ -6,6 +6,7 @@
     </head>
     <body>
         <?php include 'include/header.php'; ?>
+        <br><br><br>
         <form id="connexion" method="POST" action="traitement_connexion.php">
                 <label for="nom">Nom d'utilisateur :</label>
                 <input type="text" id="nom" name="nom" required>
