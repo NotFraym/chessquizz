@@ -14,7 +14,7 @@ body {
 }
 
 h2, h3 {
-    color: #009933;
+    color: #0066cc;
 }
 
 p {
@@ -27,22 +27,41 @@ p {
 }
 
 .question img {
-    border: 2px solid #009933;
+    border: 2px solid #0066cc;
     border-radius: 10px;
+    max-width: 100%;
+    height: auto;
 }
 
 form {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    max-width: 400px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input, select {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
 }
 
 button {
-    background-color: #009933;
+    background-color: #0066cc;
     color: #fff;
     padding: 10px 20px;
-    margin: 10px;
+    margin: 10px 0;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -50,11 +69,5 @@ button {
 }
 
 button:hover {
-    background-color: #007a29;
+    background-color: #004080;
 }
-
-label, select {
-    margin-right: 10px;
-}
-
-/* Add any additional styling as needed */
