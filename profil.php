@@ -51,7 +51,7 @@ include "session_start.php";
 </form>
 <br>
 <button onclick="supprimerCompte()">Supprimer mon compte</button>
-
+<br><br>
 
 <?php include 'include/footer.php'; ?>
 
