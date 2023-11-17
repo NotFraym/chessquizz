@@ -18,6 +18,7 @@ include "session_start.php";
 
     $reponse_correcte = false; // Variable pour indiquer si la réponse est correcte ou non
     $bonne_reponse = ""; // Variable pour stocker la bonne réponse
+    $difficulte = ""; // Variable pour stocker la difficulté de la question
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $question_id = isset($_POST['question_id']) ? $_POST['question_id'] : null;
@@ -34,19 +35,25 @@ include "session_start.php";
                 die("Erreur de connexion à la base de données : " . $conn->connect_error);
             }
 
-            $query = "SELECT bonne_reponse FROM questions WHERE id = ?";
+            $query = "SELECT bonne_reponse, difficulte FROM questions WHERE id = ?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param("i", $question_id);
             $stmt->execute();
-            $stmt->bind_result($bonne_reponse);
+            $stmt->bind_result($bonne_reponse, $difficulte);
 
             if ($stmt->fetch()) {
                 if ($reponse_utilisateur == $bonne_reponse) {
                     // La réponse est correcte
                     $reponse_correcte = true;
 
-                    // Incrémentez le score
-                    $_SESSION['score']++;
+                    // Incrémentez le score en fonction de la difficulté
+                    if ($difficulte == 'facile') {
+                        $_SESSION['score'] += 1;
+                    } elseif ($difficulte == 'moyen') {
+                        $_SESSION['score'] += 2;
+                    } elseif ($difficulte == 'difficile') {
+                        $_SESSION['score'] += 3;
+                    }
                 }
             }
 
@@ -74,7 +81,7 @@ include "session_start.php";
     <!-- Bouton pour passer à la question suivante -->
     <form action="quizz.php" method="get">
         <input type="hidden" name="categorie" value="<?php echo $categorie_id; ?>">
-        <input type="hidden" name="difficulte" value="facile"> <!-- Remplacer "facile" par la difficulté souhaitée -->
+        <input type="hidden" name="difficulte" value="facile"> 
         <button type="submit">Question suivante</button>
     </form>
 
