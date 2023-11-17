@@ -1,4 +1,6 @@
-<?php include "session_start.php"; ?>
+<?php
+include "session_start.php";
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -9,6 +11,11 @@
     <?php include 'include/header.php'; ?>
 
     <?php
+    // Initialize the score if not already set
+    if (!isset($_SESSION['score'])) {
+        $_SESSION['score'] = 0;
+    }
+
     $reponse_correcte = false; // Variable pour indiquer si la réponse est correcte ou non
     $bonne_reponse = ""; // Variable pour stocker la bonne réponse
 
@@ -37,6 +44,9 @@
                 if ($reponse_utilisateur == $bonne_reponse) {
                     // La réponse est correcte
                     $reponse_correcte = true;
+
+                    // Incrémentez le score
+                    $_SESSION['score']++;
                 }
             }
 
@@ -55,6 +65,9 @@
     <?php else : ?>
         <p>Votre réponse est incorrecte. La réponse correcte est : <?php echo $bonne_reponse; ?></p>
     <?php endif; ?>
+
+    <!-- Afficher le score dans le header -->
+    <p>Score actuel : <?php echo $_SESSION['score']; ?></p>
 
     <br>
 

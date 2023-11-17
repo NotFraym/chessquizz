@@ -10,11 +10,18 @@
             if (isset($_SESSION['user_statut']) && $_SESSION['user_statut'] == 'admin') {
                 echo '<a href="../administration.php">Administration</a>';
             }
+
             // Lien vers la page "profil.php"
             echo '<a href="../profil.php">Profil</a>';
 
+            // Afficher le score
+            if (isset($_SESSION['score'])) {
+                echo '<span>Score : ' . $_SESSION['score'] . '</span>';
+            }
+
             echo '<a href="../deconnexion.php">Déconnexion</a>';
         }
+
         if (!isset($_SESSION['user_nom'])) {
             echo '<a href="../connexion.php">Connexion</a>';
             echo '<a href="../inscription.php">Inscription</a>';
