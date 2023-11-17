@@ -43,6 +43,10 @@
             $stmt->close();
             $conn->close();
         }
+    } else {
+        // If the request is not POST, it means the timer has reached the timeout
+        $reponse_correcte = false;
+        $bonne_reponse = "pas répondu";
     }
     ?>
 

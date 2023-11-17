@@ -97,6 +97,8 @@
                         if (timerSeconds >= timeoutDuration) {
                             document.getElementById("timer-message").innerHTML = "Délai de réponse dépassé";
                             clearInterval(timerInterval);
+                            // Redirect to traitement_reponse.php with timeout message
+                            window.location.href = "traitement_reponse.php?categorie_id=" + encodeURIComponent(<?php echo $categorie_id; ?>) + "&question_id=" + encodeURIComponent(<?php echo $question_id; ?>) + "&timeout=true";
                         } else {
                             updateTimerMessage();
                         }
