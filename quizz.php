@@ -81,6 +81,9 @@
         echo '</form>';
         echo '</div>';
 
+        // Set the timeout duration
+        $timeoutDuration = 10;
+
         echo '<div id="timer-message">Temps restant : <span id="timer">' . $timeoutDuration . '</span> secondes</div>';
         echo '<script>
             var timerSeconds = 0;
@@ -109,8 +112,6 @@
                 startTimer();
             };
         </script>';
-        
-        
     } else {
         // Aucune question disponible pour cette catégorie et cette difficulté
         echo '<p>Aucune question disponible pour cette catégorie et cette difficulté.</p>';
