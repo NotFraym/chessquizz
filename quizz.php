@@ -81,34 +81,35 @@
         echo '</form>';
         echo '</div>';
 
-        echo '<div id="timer-message"></div>';
+        echo '<div id="timer-message">Temps restant : <span id="timer"></span> secondes</div>';
         echo '<script>
-                var timerSeconds = 0;
-                var timeoutDuration = 10;
-
-                function updateTimerMessage() {
-                    document.getElementById("timer-message").innerHTML = "Temps restant : " + (timeoutDuration - timerSeconds) + " secondes";
-                }
-
-                function startTimer() {
-                    var timerInterval = setInterval(function () {
-                        timerSeconds++;
-
-                        if (timerSeconds >= timeoutDuration) {
-                            document.getElementById("timer-message").innerHTML = "Délai de réponse dépassé";
-                            clearInterval(timerInterval);
-                            // Redirect to traitement_reponse.php with timeout message
-                            window.location.href = "traitement_reponse.php?categorie_id=" + encodeURIComponent(<?php echo $categorie_id; ?>) + "&question_id=" + encodeURIComponent(<?php echo $question_id; ?>) + "&timeout=true";
-                        } else {
-                            updateTimerMessage();
-                        }
-                    }, 1000);
-                }
-
-                window.onload = function () {
-                    startTimer();
-                };
-            </script>';
+            var timerSeconds = 0;
+            var timeoutDuration = 10;
+        
+            function updateTimerMessage() {
+                document.getElementById("timer").innerHTML = timeoutDuration - timerSeconds;
+            }
+        
+            function startTimer() {
+                var timerInterval = setInterval(function () {
+                    timerSeconds++;
+        
+                    if (timerSeconds >= timeoutDuration) {
+                        document.getElementById("timer-message").innerHTML = "Délai de réponse dépassé";
+                        clearInterval(timerInterval);
+                        // Redirect to traitement_reponse.php with timeout message
+                        window.location.href = "traitement_reponse.php?categorie_id=" + encodeURIComponent(<?php echo $categorie_id; ?>) + "&question_id=" + encodeURIComponent(<?php echo $question_id; ?>) + "&timeout=true";
+                    } else {
+                        updateTimerMessage();
+                    }
+                }, 1000);
+            }
+        
+            window.onload = function () {
+                startTimer();
+            };
+        </script>';
+        
     } else {
         // Aucune question disponible pour cette catégorie et cette difficulté
         echo '<p>Aucune question disponible pour cette catégorie et cette difficulté.</p>';
