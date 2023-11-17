@@ -17,6 +17,7 @@ include "session_start.php";
 <?php include 'include/header.php';
       include 'include/head.php'; ?>
 <script src="action_user.js"></script>
+<br><br>
 <h3><p>Paramètres du compte</p></h3>
 
 <form method="POST" action="traitement_modif_user.php">
