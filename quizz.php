@@ -81,10 +81,10 @@
         echo '</form>';
         echo '</div>';
 
-        echo '<div id="timer-message">Temps restant : <span id="timer"></span> secondes</div>';
+        echo '<div id="timer-message">Temps restant : <span id="timer">' . $timeoutDuration . '</span> secondes</div>';
         echo '<script>
             var timerSeconds = 0;
-            var timeoutDuration = 10;
+            var timeoutDuration = ' . $timeoutDuration . ';
         
             function updateTimerMessage() {
                 document.getElementById("timer").innerHTML = timeoutDuration - timerSeconds;
@@ -98,7 +98,7 @@
                         document.getElementById("timer-message").innerHTML = "Délai de réponse dépassé";
                         clearInterval(timerInterval);
                         // Redirect to traitement_reponse.php with timeout message
-                        window.location.href = "traitement_reponse.php?categorie_id=" + encodeURIComponent(<?php echo $categorie_id; ?>) + "&question_id=" + encodeURIComponent(<?php echo $question_id; ?>) + "&timeout=true";
+                        window.location.href = "traitement_reponse.php?categorie_id=" + encodeURIComponent(' . $categorie_id . ') + "&question_id=" + encodeURIComponent(' . $question_id . ') + "&timeout=true";
                     } else {
                         updateTimerMessage();
                     }
@@ -109,6 +109,7 @@
                 startTimer();
             };
         </script>';
+        
         
     } else {
         // Aucune question disponible pour cette catégorie et cette difficulté
