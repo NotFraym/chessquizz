@@ -16,7 +16,10 @@
 
             // Afficher le score
             if (isset($_SESSION['score'])) {
-                echo '<span>Score : ' . $_SESSION['score'] . '</span>';
+                echo '<span>Score général : ' . $_SESSION['score'] . '</span>';
+            }
+            if (isset($_SESSION['score_f'])) {
+                echo '<span>Score par catégorie : ' . $_SESSION['score_f'] . '</span>';
             }
 
             echo '<a href="../deconnexion.php">Déconnexion</a>';

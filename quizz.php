@@ -44,6 +44,9 @@
         $bonne_reponse = $row['bonne_reponse'];
 
         // Afficher l'intitulé de la catégorie
+        if (isset($_SESSION['score_cat'])) {
+            echo '<span>Score de la catégorie : ' . $_SESSION['score_cat'] . '</span>';
+        }
         echo '<h3>' . $intitule_categorie . '</h3>';
 
         // Afficher la question ici
@@ -76,6 +79,7 @@
 
         foreach ($reponses as $reponse) {
             echo '<button type="submit" name="reponse" value="' . $reponse . '">' . $reponse . '</button>';
+        
         }
 
         echo '</form>';

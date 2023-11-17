@@ -49,10 +49,13 @@ include "session_start.php";
                     // Incrémentez le score en fonction de la difficulté
                     if ($difficulte == 'facile') {
                         $_SESSION['score'] += 1;
+                        $_SESSION['score_f'] += 1;
                     } elseif ($difficulte == 'moyen') {
                         $_SESSION['score'] += 2;
+                        $_SESSION['score_m'] += 1;
                     } elseif ($difficulte == 'difficile') {
                         $_SESSION['score'] += 3;
+                        $_SESSION['score_d'] += 1;
                     }
                 }
             }
