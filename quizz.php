@@ -80,6 +80,33 @@
 
         echo '</form>';
         echo '</div>';
+
+        echo '<div id="timer-message"></div>';
+        echo '<script>
+                var timerSeconds = 0;
+                var timeoutDuration = 10;
+
+                function updateTimerMessage() {
+                    document.getElementById("timer-message").innerHTML = "Temps restant : " + (timeoutDuration - timerSeconds) + " secondes";
+                }
+
+                function startTimer() {
+                    var timerInterval = setInterval(function () {
+                        timerSeconds++;
+
+                        if (timerSeconds >= timeoutDuration) {
+                            document.getElementById("timer-message").innerHTML = "Délai de réponse dépassé";
+                            clearInterval(timerInterval);
+                        } else {
+                            updateTimerMessage();
+                        }
+                    }, 1000);
+                }
+
+                window.onload = function () {
+                    startTimer();
+                };
+            </script>';
     } else {
         // Aucune question disponible pour cette catégorie et cette difficulté
         echo '<p>Aucune question disponible pour cette catégorie et cette difficulté.</p>';
